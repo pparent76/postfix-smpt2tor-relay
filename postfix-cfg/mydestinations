@@ -1,0 +1,3 @@
+/localhost\.localdomain/    ACCEPT
+/localhost/                 ACCEPT
+/.*\.omb\.one/	            ACCEPT

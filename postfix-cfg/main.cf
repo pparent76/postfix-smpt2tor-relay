@@ -6,7 +6,7 @@
 # is /etc/mailname.
 #myorigin = /etc/mailname
 
-smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+smtpd_banner = Annonymous
 biff = no
 
 # appending .domain is the MUA's job.
@@ -20,11 +20,11 @@ readme_directory = no
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = com.own-mailbox.com
+myhostname = proxy.omb.one
 alias_maps = hash:/etc/aliases, hash:/etc/postfix/aliases
 alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
-mydestination = localhost, com.own-mailbox.com, own-mailbox.com, pparent.omb.one
+mydestination = pcre:/etc/postfix/mydestinations
 smtp_use_tls=yes
 smtp_sasl_auth_enable = yes
 smtp_sasl_security_options =
@@ -34,7 +34,6 @@ mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
 mailbox_command = /usr/bin/procmail -Y -a $DOMAIN
-#header_checks = regexp:/etc/postfix/header_checks
 
 
 smtpd_sasl_local_domain = 
@@ -52,7 +51,7 @@ smtpd_tls_session_cache_timeout = 3600s
 tls_random_source = dev:/dev/urandom
 #header_checks = regexp:/etc/postfix/header_checks
 
-virtual_alias_domains = com.own-mailbox.com, own-mailbox.com
+virtual_alias_domains = proxy.omb.one
 virtual_alias_maps = hash:/etc/postfix/virtual
 
 smtpd_milters = inet:localhost:12301
@@ -62,4 +61,4 @@ milter_protocol = 2
 milter_default_action = accept
 
 
-transport_maps = hash:/etc/postfix/transport
+transport_maps = mysql:/etc/postfix/transport.mysql
