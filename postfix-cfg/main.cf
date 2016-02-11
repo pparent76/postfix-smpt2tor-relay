@@ -52,7 +52,7 @@ tls_random_source = dev:/dev/urandom
 #header_checks = regexp:/etc/postfix/header_checks
 
 virtual_alias_domains = proxy.omb.one
-virtual_alias_maps = hash:/etc/postfix/virtual
+virtual_alias_maps = regexp:/etc/postfix/virtual
 
 smtpd_milters = inet:localhost:12301
 non_smtpd_milters = inet:localhost:12301
