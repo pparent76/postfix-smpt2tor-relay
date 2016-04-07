@@ -1,1 +1,1 @@
-/([a-zA-Z0-9_-]*)@([a-zA-Z0-9_-]*).omb.one/             ${1}@${2}.tor.omb.one
+/([a-zA-Z0-9_-]*)@([a-zA-Z0-9_-]*).omb.one/             ${1}@${2}.omb.one.tor
