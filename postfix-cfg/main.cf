@@ -18,22 +18,29 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+
+smtpd_tls_cert_file=/etc/letsencrypt/live/proxy.omb.one-0003/fullchain.pem
+smtpd_tls_key_file=/etc/letsencrypt/live/proxy.omb.one-0003/privkey.pem
+smtpd_tls_CAfile=/etc/letsencrypt/live/proxy.omb.one-0003/fullchain.pem
 smtpd_use_tls=yes
+smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
+smtpd_tls_mandatory_ciphers=high
+tls_high_cipherlist=EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA256:EECDH:+CAMELLIA128:+AES128:+SSLv3:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!DSS:!RC4:!SEED:!IDEA:!ECDSA:kEDH:CAMELLIA128-SHA:AES128-SHA
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtpd_tls_security_level=may
+smtp_tls_security_level = may
 
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
 smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
-myhostname = vps262444.ovh.net
+myhostname = proxy.omb.one 
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
 relayhost = 
-mynetworks = 
+mynetworks = 209.249.157.69, 65.19.167.132
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
@@ -48,3 +55,20 @@ transport = mysql:/etc/postfix/transport.mysql
 virtual_domains = proxy.omb.one
 virtual_alias_maps = regexp:/etc/postfix/virtual
 mydestination = pcre:/etc/postfix/mydestinations
+smtp_connect_timeout = 90
+queue_run_delay = 30
+
+
+#############################################
+#	SaSL
+#############################################
+
+
+broken_sasl_auth_clients = yes
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_application_name = smtpd
+#smtpd_sender_login_maps = hash:/etc/postfix/mymaps/smtpd_sender_login_maps
+smtpd_sasl_local_domain =
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth

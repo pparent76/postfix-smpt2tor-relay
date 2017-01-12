@@ -1,3 +1,5 @@
-/localhost\.localdomain/    ACCEPT
-/localhost/                 ACCEPT
-/.*\.omb\.one/	            ACCEPT
+/^encendio$/                  ACCEPT
+/^localhost\.localdomain$/    ACCEPT
+/^localhost$/                 ACCEPT
+/^.*\.omb\.one$/              ACCEPT
+/proxy.omb.one.tor/		ACCEPT

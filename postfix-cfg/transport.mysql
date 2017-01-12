@@ -4,8 +4,8 @@
 
 # The user name and password to log into the mysql server.
 hosts = 127.0.0.1
-user = XXXXX
-password = XXXXXX
+user = root
+password = xxxxxxx 
 
 # The database name on the servers.
 dbname = postfix
